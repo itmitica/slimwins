@@ -10,6 +10,7 @@ intended to complement built-in mouse keys capabilities: a 26x26 mouse movement 
 ```
 F1            - move mouse cursor to knews bar
 CTRL+SPACE    - show running apps, equivalent to ALT+CTRL+TAB
+APPSKEY       - remapped as RWIN
 
 CRTL+;        - show hinting grid
 ESC           - hide hinting grid

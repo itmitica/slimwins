@@ -125,6 +125,7 @@ return
 ^!r::Reload
 
 ^space::^!tab
+AppsKey::RWin ; GMMK Keyboard
 
 ;VKE2::LShift
 SC056::LShift
