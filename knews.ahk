@@ -135,10 +135,10 @@ $+space::
   Send, #{Tab}
 return
 
-$^!;:: 
+$^#;:: 
   Send, ^#{d}
 return
 
-$^!p:: 
+$^#p:: 
   Send, ^#{F4}
 return

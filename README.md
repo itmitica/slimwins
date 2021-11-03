@@ -10,9 +10,9 @@ intended to complement built-in mouse keys capabilities: a 26x26 mouse movement 
 ```
 CTRL+SPACE      - show running apps, alternative to CTRL+ALT+TAB
 SHIFT+SPACE     - show multitasking view, alternative to WIN+TAB
-CTRL+ALT+;      - new virtual desktop, alternative to CTRL+WIN+D
-CTRL+ALT+P      - close current virtual desktop, alternative to CTRL+WIN+F4
-CTRL+WIN+LEFT   
+CTRL+WIN+;      - new virtual desktop, alternative to CTRL+WIN+D
+CTRL+WIN+P      - close current virtual desktop, alternative to CTRL+WIN+F4
+CTRL+WIN+LEFT   ,
 CTRL+WIN+RIGHT  - switch virtual desktops
 
 F1              - move mouse cursor to knews bar
@@ -29,8 +29,10 @@ launch scripts with autohotkey exe.
 
 ## previous work
 [Skrommel/ShowOff](https://www.dcmembers.com/skrommel/download/showoff/)
+
 [GavinPen/AhkCoordGrid](https://github.com/GavinPen/AhkCoordGrid/)
  
 ## screens
-![knews](.\screens\knews_screen.png)
-![mhints](.\screens\mhints_screen.png)
+![knews](screens/knews_screen.png)
+
+![mhints](screens/mhints_screen.png)
