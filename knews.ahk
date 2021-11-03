@@ -1,12 +1,10 @@
 ﻿#SingleInstance,Force
 I_Icon = knews.ico
-IfExist, %I_Icon%
 Menu, Tray, Icon, %I_Icon%
-;return
 SetDefaultMouseSpeed, 0
 CoordMode,Mouse,Screen
 
-applicationname=mc-hanger
+applicationname=knews
 
 Gosub,READINI
   
@@ -122,10 +120,25 @@ return
   GoSub LockState
 return
 
-^!r::Reload
-
-^space::^!tab
-AppsKey::RWin ; GMMK Keyboard
+AppsKey::RWin
 
 ;VKE2::LShift
 SC056::LShift
+
+^!r::Reload
+
+$^space::
+  Send, ^!{Tab}
+return
+
+$+space:: 
+  Send, #{Tab}
+return
+
+$^!;:: 
+  Send, ^#{d}
+return
+
+$^!p:: 
+  Send, ^#{F4}
+return

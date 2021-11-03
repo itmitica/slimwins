@@ -8,18 +8,29 @@ intended to complement built-in mouse keys capabilities: a 26x26 mouse movement 
 
 ## keyboard shortcuts
 ```
-F1            - move mouse cursor to knews bar
-CTRL+SPACE    - show running apps, equivalent to ALT+CTRL+TAB
-APPSKEY       - remapped as RWIN
+CTRL+SPACE      - show running apps, alternative to CTRL+ALT+TAB
+SHIFT+SPACE     - show multitasking view, alternative to WIN+TAB
+CTRL+ALT+;      - new virtual desktop, alternative to CTRL+WIN+D
+CTRL+ALT+P      - close current virtual desktop, alternative to CTRL+WIN+F4
+CTRL+WIN+LEFT   
+CTRL+WIN+RIGHT  - switch virtual desktops
 
-CRTL+;        - show hinting grid
-ESC           - hide hinting grid
-CTRL+ALT+NUM  - enable/disable mouse keys
+F1              - move mouse cursor to knews bar
+CTRL+ALT+NUM    - enable/disable mouse keys functionality
+CRTL+;          - show hinting grid
+ESC             - hide hinting grid
+
+APPSKEY         - remapped as RWIN
+LEFT |\         - remapped as LSHIFT
 ```
 
 ## install
 launch scripts with autohotkey exe.
+
+## previous work
+[Skrommel/ShowOff](https://www.dcmembers.com/skrommel/download/showoff/)
+[GavinPen/AhkCoordGrid](https://github.com/GavinPen/AhkCoordGrid/)
  
 ## screens
-![knews](knews_screen.png)
-![mhints](mhints_screen.png)
+![knews](.\screens\knews_screen.png)
+![mhints](.\screens\mhints_screen.png)
