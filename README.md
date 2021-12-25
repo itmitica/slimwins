@@ -8,20 +8,20 @@ intended to complement built-in mouse keys capabilities: a 26x26 mouse movement 
 
 ## keyboard shortcuts
 ```
-CTRL+SPACE      - show running apps, alternative to CTRL+ALT+TAB
-SHIFT+SPACE     - show multitasking view, alternative to WIN+TAB
-CTRL+WIN+;      - new virtual desktop, alternative to CTRL+WIN+D
-CTRL+WIN+P      - close current virtual desktop, alternative to CTRL+WIN+F4
-CTRL+WIN+LEFT   ,
-CTRL+WIN+RIGHT  - switch virtual desktops
+LWIN+RCTRL        - show running apps, alternative to CTRL+ALT+TAB
+LWIN+RSHIFT       - show multitasking view, alternative to WIN+TAB
+LWIN+LCTRL+;      - new virtual desktop, alternative to CTRL+WIN+D
+LWIN+LCTRL+P      - close current virtual desktop, alternative to CTRL+WIN+F4
+WIN+CTRL+LEFT     ,
+WIN+CTRL+RIGHT    - switch virtual desktops (default Windows keyboard shortcuts)
 
-F1              - move mouse cursor to knews bar
-CTRL+ALT+NUM    - enable/disable mouse keys functionality
-CRTL+;          - show hinting grid
-ESC             - hide hinting grid
+F1                - move mouse cursor to knews bar
+CTRL+ALT+NUM      - enable/disable mouse keys functionality (default Windows keyboard shortcuts)
+CRTL+;            - show hinting grid
+ESC               - hide hinting grid
 
-APPSKEY         - remapped as RWIN
-LEFT |\         - remapped as LSHIFT
+APPSKEY           - remapped as RWIN
+LEFT |\           - remapped as LSHIFT
 ```
 
 ## install

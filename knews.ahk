@@ -127,18 +127,20 @@ SC056::LShift
 
 ^!r::Reload
 
-$^space::
+LWin & RCtrl::
+RCtrl & LWin::
   Send, ^!{Tab}
 return
 
-$+space:: 
+LWin & RShift::
+RShift & LWin::
   Send, #{Tab}
 return
 
-$^#;:: 
+$<#<^;:: 
   Send, ^#{d}
 return
 
-$^#p:: 
+$<#<^p:: 
   Send, ^#{F4}
 return
