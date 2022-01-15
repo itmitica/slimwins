@@ -1,7 +1,7 @@
 # slimwin: slightly improved windows
 
 ## knews: keyboard news
-intended to complement the task bar and the task switcher: lock keys status, last pressed key, mouse hanger, task switcher keyboard binding.
+intended to complement the task bar and the task switcher: display current virtual desktop name, lock keys status, last pressed key, mouse hanger, task switcher keyboard binding.
 
 ## mhints: mouse hints
 intended to complement built-in mouse keys capabilities: a 26x26 mouse movement hinting system grid with no clicks, by default.
