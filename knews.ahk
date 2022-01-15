@@ -14,7 +14,7 @@ keys=
 sw := A_ScreenWidth
 sh := A_ScreenHeight
 opty := sh * 4/5
-optw := 300
+optw := 400
 opth := 30
 optx := sw - 1.33*optw 
 
@@ -22,13 +22,15 @@ Gui,+Owner +AlwaysOnTop -Resize -SysMenu -MinimizeBox -MaximizeBox -Disabled -Ca
 Gui,Margin,0,0
 Gui,Color,2E3440
 Gui,Font,CE5E9F0 S12 W400,JuliaMono Medium
-Gui,Add,Text,Vlock,%A_Space%x%A_Space%x%A_Space%x
+Gui,Add,Text,Vdesk,%A_Space%Desktop 1%A_Space%%A_Space%%A_Space%
+Gui,Add,Text,Vlock x+0,%A_Space%x%A_Space%x%A_Space%x%A_Space%
 Gui,Add,Text,Vtext x+0,MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
 Gui,Show,X%optx% Y%opty% W%optw% H%opth% NoActivate,%applicationname%
 GuiControl,,text,
 WinSet,Transparent,210,%applicationname%
 
 Gosub,LockState
+Gosub,DeskState
 
 Loop
 {
@@ -144,3 +146,111 @@ return
 $<#<^p:: 
   Send, ^#{F4}
 return
+
+
+
+DeskState:
+    mapDesktopsFromRegistry()
+    readCurrentDesktopNameFromRegistry()
+    GuiControl,,desk, %A_Space%%CurrentDesktopName%
+return
+
+^#Left::
+    global CurrentDesktop, CurrentDesktopName
+    Send ^#{Left}
+    Sleep,10
+    mapDesktopsFromRegistry()
+    readCurrentDesktopNameFromRegistry()
+    GoSub DeskState
+    ;MsgBox, %CurrentDesktopName%
+    ;TrayTip Desktop %CurrentDesktop%, %CurrentDesktopName%, 1, 0x11
+    return
+
+^#Right::
+    global CurrentDesktop, CurrentDesktopName
+    Send ^#{Right}
+    Sleep,10
+    mapDesktopsFromRegistry()
+    readCurrentDesktopNameFromRegistry()
+    GoSub DeskState
+    ;MsgBox, %CurrentDesktopName%
+    ;TrayTip Desktop %CurrentDesktop%, %CurrentDesktopName%, 1, 0x11
+    return
+
+readCurrentDesktopNameFromRegistry() {
+    global CurrentDesktop, CurrentDesktopId, CurrentDesktopName
+    s := CurrentDesktopId
+    FolderName := "{"
+    FolderName := FolderName SubStr(s, 7, 2) SubStr(s, 5, 2) SubStr(s, 3, 2) SubStr(s, 1, 2)
+    FolderName := FolderName "-"
+    FolderName := FolderName SubStr(s, 11, 2) SubStr(s, 9, 2)
+    FolderName := FolderName "-"
+    FolderName := FolderName SubStr(s, 15, 2) SubStr(s, 13, 2)
+    FolderName := FolderName "-"
+    FolderName := FolderName SubStr(s, 17, 4)
+    FolderName := FolderName "-"
+    FolderName := FolderName SubStr(s, 21, 12)
+    FolderName := FolderName "}"
+    RegRead, CurrentDesktopName, HKEY_CURRENT_USER, SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\VirtualDesktops\Desktops\%FolderName%, Name
+    if (CurrentDesktopName = "") {
+        CurrentDesktopName = Desktop %CurrentDesktop%
+    }
+}
+
+; I found the following functions at:
+; https://www.computerhope.com/tips/tip224.htm
+mapDesktopsFromRegistry() {
+    global CurrentDesktop, DesktopCount, CurrentDesktopId
+    ; Get the current desktop UUID. Length should be 32 always, but there's no guarantee this couldn't change in a later Windows release so we check.
+    IdLength := 32
+    SessionId := getSessionId()
+    if (SessionId) {
+        RegRead, CurrentDesktopId, HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\SessionInfo\%SessionId%\VirtualDesktops, CurrentVirtualDesktop
+        if (CurrentDesktopId) {
+            IdLength := StrLen(CurrentDesktopId)
+        }
+    }
+    ; Get a list of the UUIDs for all virtual desktops on the system
+    RegRead, DesktopList, HKEY_CURRENT_USER, SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\VirtualDesktops, VirtualDesktopIDs
+    if (DesktopList) {
+        DesktopListLength := StrLen(DesktopList)
+        ; Figure out how many virtual desktops there are
+        DesktopCount := DesktopListLength / IdLength
+    }
+    else {
+        DesktopCount := 1
+    }
+    ; Parse the REG_DATA string that stores the array of UUID's for virtual desktops in the registry.
+    i := 0
+    while (CurrentDesktopId and i < DesktopCount) {
+        StartPos := (i * IdLength) + 1
+        DesktopIter := SubStr(DesktopList, StartPos, IdLength)
+        OutputDebug, The iterator is pointing at %DesktopIter% and count is %i%.
+        ; Break out if we find a match in the list. If we didn't find anything, keep the
+        ; old guess and pray we're still correct :-D.
+        if (DesktopIter = CurrentDesktopId) {
+            CurrentDesktop := i + 1
+            OutputDebug, Current desktop number is %CurrentDesktop% with an ID of %DesktopIter%.
+            break
+        }
+        i++
+    }
+}
+
+
+getSessionId()
+{
+    ProcessId := DllCall("GetCurrentProcessId", "UInt")
+    if ErrorLevel {
+        OutputDebug, Error getting current process id: %ErrorLevel%
+        return
+    }
+    OutputDebug, Current Process Id: %ProcessId%
+    DllCall("ProcessIdToSessionId", "UInt", ProcessId, "UInt*", SessionId)
+    if ErrorLevel {
+        OutputDebug, Error getting session id: %ErrorLevel%
+        return
+    }
+    OutputDebug, Current Session Id: %SessionId%
+    return SessionId
+}
