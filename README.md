@@ -1,4 +1,4 @@
-# slimwin: slightly improved windows
+# slimwins - slightly improved windows
 
 ## amend default windows hotkeys
 ```
