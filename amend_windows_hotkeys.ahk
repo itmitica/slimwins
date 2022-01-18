@@ -1,8 +1,4 @@
-﻿#SingleInstance force
-#MaxHotkeysPerInterval 500
-#UseHook
-#InstallKeybdHook
-SetKeyDelay, -1
+﻿#Include general_settings.ahk
 
 LWin & RCtrl::
 RCtrl & LWin::
